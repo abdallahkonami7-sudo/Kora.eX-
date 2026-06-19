@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عبدالله شيخ الأرض | موسوعة الأندية العالمية</title>
+<style>
+:root {
+  --gold: #ffd700;
+  --bg-card: rgba(20, 20, 20, 0.85);
+  --border-color: rgba(255, 215, 0, 0.25);
+}
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Cairo", sans-serif;
+  background-color: #0c0c0c !important; 
+  background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('images/Real madrid 8.jpg');
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* القائمة العلوية المحدثة */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 10px 5px;
+  z-index: 1000;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.15);
+}
+
+/* تبويبات التنقل (سطر واحد قابل للتمرير) */
+.nav-tabs { 
+  display: flex; 
+  flex-direction: row; 
+  gap: 10px; 
+  overflow-x: auto; 
+  white-space: nowrap; 
+  padding-bottom: 8px;
+  margin-bottom: 5px;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+
+nav a {
+  color: #aaaaaa;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+nav a:hover, nav a.active-tab { color: var(--gold); background: rgba(255, 215, 0, 0.05); }
+
+/* شريط اختيار الأندية (سطر واحد قابل للتمرير) */
+.club-selector { 
+  display: flex; 
+  gap: 8px; 
+  overflow-x: auto; 
+  white-space: nowrap; 
+  padding: 5px;
+}
+.club-selector::-webkit-scrollbar { display: none; }
+
+.club-btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e0e0e0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "Cairo", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.club-btn:hover, .club-btn.active-club { background: var(--gold); color: #000000; border-color: var(--gold); }
+
+/* الحاويات */
+.container { max-width: 950px; margin: 160px auto 60px; padding: 35px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); text-align: center; }
+h1 { color: var(--gold); font-size: 34px; font-weight: 900; margin-bottom: 25px; }
+h2 { color: var(--gold); font-size: 24px; margin-top: 35px; border-right: 4px solid var(--gold); padding-right: 10px; text-align: right; }
+p { line-height: 1.85; font-size: 18px; color: #e0e0e0; text-align: right; }
+.video-wrapper { position: relative; display: inline-block; width: 100%; max-width: 650px; margin: 20px 0; }
+.video-wrapper video { width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+.video-wrapper img { position: absolute; top: 15px; left: 15px; width: 65px; border-radius: 8px; }
+.titles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 25px; }
+.titles div { background: rgba(15, 15, 15, 0.9); padding: 22px; border-radius: 12px; border: 1px solid rgba(255, 215, 0, 0.1); }
+.titles span { display: block; margin-top: 8px; font-size: 24px; font-weight: 900; color: var(--gold); }
+.timeline { border-right: 4px solid var(--gold); padding-right: 25px; text-align: right; max-width: 750px; margin: 30px auto; }
+.event { margin-bottom: 25px; font-size: 18px; font-weight: 600; color: #e0e0e0; position: relative; }
+.event::before { content: "⚽"; position: absolute; right: -37px; top: 2px; }
+.top-btn { position: fixed; bottom: 25px; right: 25px; background: var(--gold); border: none; width: 48px; height: 48px; border-radius: 8px; cursor: pointer; z-index: 1001; }
+.section-hidden { display: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-tabs">
+    <a id="tab-home" class="active-tab" onclick="showSection('home')">🏠 الرئيسية والقصة</a>
+    <a id="tab-titles" onclick="showSection('titles')">🏆 خزنة البطولات</a>
+    <a id="tab-history" onclick="showSection('history')">📜 الجدول الزمني</a>
+  </div>
+  <div class="club-selector">
+    <button class="club-btn active-club" onclick="switchClub('real_madrid', this)">ريال مدريد</button>
+    <button class="club-btn" onclick="switchClub('barcelona', this)">برشلونة</button>
+    <button class="club-btn" onclick="switchClub('man_city', this)">مانشستر سيتي</button>
+    <button class="club-btn" onclick="switchClub('liverpool', this)">ليفربول</button>
+    <button class="club-btn" onclick="switchClub('bayern', this)">بايرن ميونخ</button>
+  </div>
+</nav>
+
+<div class="container" id="home">
+  <h1 id="club-title">📖 قصة نادي ريال مدريد الملكي</h1>
+  <div class="video-wrapper">
+    <video id="club-video" src="video/real_madrid_story.mp4" controls></video>
+    <img id="club-logo" src="images/real_madrid_logo.jpg" alt="شعار النادي">
+  </div>
+  <div id="club-story-content"></div>
+</div>
+
+<div class="container section-hidden" id="titles">
+  <h1 id="titles-heading">🏆 خزنة بطولات النادي</h1>
+  <div class="titles" id="titles-grid"></div>
+</div>
+
+<div class="container section-hidden" id="history">
+  <h1 id="history-heading">📜 السجل التاريخي والمحطات</h1>
+  <div class="timeline" id="timeline-content"></div>
+</div>
+
+<button class="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const clubsData = {
+  real_madrid: { name: "ريال مدريد", title: "📖 قصة نادي ريال مدريد الملكي", video: "video/real_madrid_story.mp4", logo: "images/real_madrid_logo.jpg", story: `<p>تأسس نادي ريال مدريد في 6 مارس 1902، ويعتبر من أعظم وأنجح الأندية في تاريخ كرة القدم العالمية. في عام 1920، منحه الملك ألفونسو الثالث عشر اللقب الملكي "Real".</p><h2>العصر الذهبي والسيطرة</h2><p>اكتسح النادي القارة الأوروبية في خمسينيات القرن الماضي بقيادة الأسطورة ألفريدو دي ستيفانو محققاً أول 5 ألقاب متتالية في دوري أبطال أوروبا.</p><h2>نادي القرن والسيطرة الحديثة</h2><p>تُوّج النادي رسمياً من الفيفا بلقب "نادي القرن العشرين". وتواصلت الهيمنة بتحقيق البطولات المتتالية التاريخية لدوري الأبطال، وتعزيز الرقم القياسي باللقب الـ15 عام 2024.</p>`, trophies: [{ name: "دوري أبطال أوروبا", count: "15 مرة" }, { name: "الدوري الإسباني", count: "36 مرة" }, { name: "كأس ملك إسبانيا", count: "20 مرة" }, { name: "كأس السوبر الإسباني", count: "13 مرة" }, { name: "كأس العالم للأندية", count: "5 مرات" }, { name: "كأس السوبر الأوروبي", count: "6 مرات" }], timeline: ["1902 – تأسيس النادي تحت اسم نادي مدريد لكرة القدم.", "1920 – منح النادي اللقب الملكي الرسمي 'ريال'.", "1956 – انطلاق الهيمنة بالفوز بأول نسخة لدوري أبطال أوروبا.", "1960 – تحقيق اللقب الخامس على التوالي في إنجاز إعجازي.", "2000 – الفيفا يعلن ريال مدريد نادياً للقرن العشرين.", "2014 – تحقيق اللقب العاشر التاريخي (La Décima).", "2018 – إنجاز تاريخي بتحقيق دوري الأبطال 3 مرات متتالية مع زيدان.", "2024 – التتويج باللقب الخامس عشر وتوسيع الفارق التاريخي."] },
+  barcelona: { name: "برشلونة", title: "📖 قصة نادي برشلونة العريق", video: "video/barcelona_story.mp4", logo: "images/barcelona_logo.jpg", story: `<p>تأسس نادي برشلونة عام 1899، ويحمل الشعار الشهير "أكثر من مجرد نادٍ" كرمز للهوية الكتلونية الكبيرة.</p><h2>فلسفة التيكي تاكا ومدرسة اللاماسيا</h2><p>اشتهر النادي بتقديم كرة قدم ممتعة تعتمد على الاستحواذ، وخرج من أكاديميته أساطير مثل ميسي، تشافي، وإنييستا.</p><h2>السداسية التاريخية</h2><p>في عام 2009 تحت قيادة بيب غوارديولا، حقق برشلونة إنجازاً غير مسبوق في تاريخ الكرة بالفوز بـ 6 ألقاب في عام واحد.</p>`, trophies: [{ name: "دوري أبطال أوروبا", count: "5 مرات" }, { name: "الدوري الإسباني", count: "27 مرة" }, { name: "كأس ملك إسبانيا", count: "31 مرة" }, { name: "كأس السوبر الإسباني", count: "14 مرة" }, { name: "كأس العالم للأندية", count: "3 مرات" }, { name: "كأس السوبر الأوروبي", count: "5 مرات" }], timeline: ["1899 – تأسيس النادي على يد خوان غامبر.", "1957 – افتتاح ملعب الكامب نو المعقل الأسطوري.", "1992 – تحقيق أول لقب في تاريخ النادي بدوري أبطال أوروبا.", "2009 – اكتسح السداسية التاريخية الكاملة التي أبهرت العالم.", "2015 – الفوز بالثلاثية التاريخية الثانية بقيادة الثلاثي MSN.", "2023 – الفوز بالدوري الإسباني المميز تحت قيادة تشافي."] },
+  man_city: { name: "مانشستر سيتي", title: "📖 قصة صعود مانشستر سيتي المرعب", video: "video/man_city_story.mp4", logo: "images/man_city_logo.jpg", story: `<p>تأسس النادي عام 1880، وتحول إلى مانشستر سيتي في عام 1894. شهد النادي ثورة حقيقية في العصر الحديث جعلته القوة المهيمنة على الكرة الإنجليزية.</p><h2>ثورة غوارديولا والـ 100 نقطة</h2><p>مع وصول بيب غوارديولا، حطم الفريق الأرقام القياسية وأصبح أول فريق يحقق 100 نقطة في موسم واحد بالبريميرليج.</p><h2>المجد الأوروبي والثلاثية</h2><p>في عام 2023، حقق الفريق حلمه الأكبر بالفوز بدوري أبطال أوروبا لأول مرة في تاريخه ليحقق الثلاثية التاريخية.</p>`, trophies: [{ name: "دوري أبطال أوروبا", count: "1 مرة" }, { name: "الدوري الإنجليزي الممتاز", count: "10 مرات" }, { name: "كأس الاتحاد الإنجليزي", count: "7 مرات" }, { name: "كأس رابطة المحترفين", count: "8 مرات" }, { name: "كأس العالم للأندية", count: "1 مرة" }, { name: "كأس السوبر الأوروبي", count: "1 مرة" }], timeline: ["1894 – اعتماد الاسم الحالي والرسمي 'مانشستر سيتي'.", "2012 – هدف سيرجيو أغويرو القاتل في الدقيقة 93:20 والظفر بالدوري.", "2018 – تحقيق لقب 'الـ 100 نقطة' التاريخي في البريميرليج.", "2023 – الفوز بدوري أبطال أوروبا لأول مرة وتحقيق الثلاثية.", "2024 – صناعة تاريخ محلي غير مسبوق بالفوز بالدوري 4 مرات متتالية."] },
+  liverpool: { name: "ليفربول", title: "📖 قصة نادي ليفربول العريق", video: "video/liverpool_story.mp4", logo: "images/liverpool_logo.jpg", story: `<p>تأسس نادي ليفربول عام 1892 في ملعب أنفيلد, ويشتهر بجماهيره الوفية وأغنيته الأسطورية الخالدة "لن تسير وحيداً أبداً".</p><h2>زعيم إنجلترا الأوروبي</h2><p>فرض ليفربول هيبته على أوروبا في السبعينيات والثمانينيات، ويمتلك أفضل سجل إنجليزي في دوري أبطال أوروبا برصيد 6 ألقاب.</p><h2>العودة الكبرى مع يورغن كلوب</h2><p>أعاد الألماني كلوب الفريق لمنصات التتويج الأوروبية وفاز بالدوري الإنجليزي الممتاز الغائب عن خزائن النادي لـ30 عاماً.</p>`, trophies: [{ name: "دوري أبطال أوروبا", count: "6 مرات" }, { name: "الدوري الإنجليزي", count: "19 مرة" }, { name: "كأس الاتحاد الإنجليزي", count: "8 مرات" }, { name: "كأس رابطة المحترفين", count: "10 مرات" }, { name: "كأس العالم للأندية", count: "1 مرة" }, { name: "كأس السوبر الأوروبي", count: "4 مرات" }], timeline: ["1892 – تأسيس النادي بعد خلاف حول ملعب الأنفيلد.", "1977 – الفوز بأول لقب للنادي في دوري أبطال أوروبا.", "2005 – معجزة إسطنبول والعودة من التأخر 3-0 أمام ميلان للفوز باللغب.", "2019 – التتويج بدوري أبطال أوروبا السادس بعد الفوز على توتنهام.", "2020 – الفوز بالدوري الإنجليزي الممتاز لأول مرة بالنظام الجديد."] },
+  bayern: { name: "بايرن ميونخ", title: "📖 قصة العملاق البافاري بايرن ميونخ", video: "video/bayern_story.mp4", logo: "images/bayern_logo.jpg", story: `<p>تأسس نادي بايرن ميونخ الألماني عام 1900، وهو الحاكم المطلق للكرة الألمانية وأحد أصلب أندية النخبة في أوروبا.</p><h2>ثلاثية السبعينات بقيادة القيصر</h2><p>بقيادة فرانز بيكنباور والهداف جيرد مولر، فرض البايرن سيطرته وحقق 3 ألقاب متتالية لدوري الأبطال.</p><h2>السداسية التاريخية الثانية</h2><p>في عام 2020 اكتسح جميع الخصوم في أوروبا (من ضمنها الفوز التاريخي 8-2) ليحقق السداسية التاريخية الكاملة مع هانزي فليك.</p>`, trophies: [{ name: "دوري أبطال أوروبا", count: "6 مرات" }, { name: "الدوري الألماني", count: "33 مرة" }, { name: "كأس ألمانيا", count: "20 مرة" }, { name: "كأس السوبر الألماني", count: "10 مرات" }, { name: "كأس العالم للأندية", count: "2 مرتان" }, { name: "كأس السوبر الأوروبي", count: "2 مرتان" }], timeline: ["1900 – تأسيس النادي في مدينة ميونخ.", "1976 – السيطرة على أوروبا والظفر بـ3 بطولات متتالية لأبطال أوروبا.", "2013 – تحقيق أول ثلاثية تاريخية في تاريخ النادي مع يوب هاينكس.", "2020 – سحق الخصوم وتحقيق السداسية التاريخية الثانية في تاريخ كرة القدم.", "2023 – الفوز بالدوري الألماني للمرة الـ11 على التوالي في الدقائق الأخيرة."] }
+};
+
+let currentClub = 'real_madrid';
+function updateClubDOM() { const data = clubsData[currentClub]; document.getElementById('club-title').innerHTML = data.title; document.getElementById('club-video').src = data.video; document.getElementById('club-logo').src = data.logo; document.getElementById('club-logo').alt = `شعار ${data.name}`; document.getElementById('club-story-content').innerHTML = data.story; document.getElementById('titles-heading').innerText = `🏆 خزنة بطولات نادي ${data.name}`; document.getElementById('history-heading').innerText = `📜 السجل التاريخي لنادي ${data.name}`; const grid = document.getElementById('titles-grid'); grid.innerHTML = ''; data.trophies.forEach(function(t) { grid.innerHTML += `<div><span class="trophy-icon">🏆</span><h4>${t.name}</h4><span>${t.count}</span></div>`; }); const timeline = document.getElementById('timeline-content'); timeline.innerHTML = ''; data.timeline.forEach(function(item) { timeline.innerHTML += `<div class="event">${item}</div>`; }); }
+function switchClub(clubKey, element) { currentClub = clubKey; document.querySelectorAll('.club-btn').forEach(function(btn) { btn.classList.remove('active-club'); }); if (element) element.classList.add('active-club'); updateClubDOM(); window.scrollTo({top:0, behavior:'smooth'}); }
+function showSection(id) { document.getElementById('home').classList.add('section-hidden'); document.getElementById('titles').classList.add('section-hidden'); document.getElementById('history').classList.add('section-hidden'); document.querySelectorAll('nav .nav-tabs a').forEach(function(a) { a.classList.remove('active-tab'); }); document.getElementById(id).classList.remove('section-hidden'); if (id === 'home') document.getElementById('tab-home').classList.add('active-tab'); if (id === 'titles') document.getElementById('tab-titles').classList.add('active-tab'); if (id === 'history') document.getElementById('tab-history').classList.add('active-tab'); window.scrollTo({top:0, behavior:'smooth'}); }
+updateClubDOM();
+</script>
+</body>
+</html>
